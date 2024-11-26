@@ -1,5 +1,6 @@
 <template>
     <div v-if="this.$store.state.isLogin">
+        <h2 class="">コミュニティーページ</h2>
         <CommunityList/>
         <SearchForm/>
     </div>

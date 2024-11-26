@@ -4,8 +4,8 @@
             {{ cmnty.community_name }}
         </td>
         <td>
-            <button v-if="!checkJoin">参加する</button>
-            <span v-else>参加中</span>
+            <button v-if="!checkJoin" class="btn btn-link">参加する</button>
+            <span v-else class="text-secondary">参加中</span>
         </td>
     </tr>
 </template>

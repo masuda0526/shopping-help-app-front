@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div class="col-3">
         <p v-if="!editFlg" @click="toggleEdit">
-            <fa icon="cart-plus"/>
+            <fa icon="plus" />
             買い物リストを追加
         </p>
-        <div v-else>
-            <input type="text" v-model="this.product_name">
-            <button @click="addList" >追加</button>
+        <div v-else class="row">
+            <input type="text" v-model="this.product_name" class="form-control col-8">
+            <button @click="addList" class="btn btn-primary col-3 ml-2">追加</button>
         </div>
     </div>
 </template>

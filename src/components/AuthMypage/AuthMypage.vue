@@ -1,12 +1,7 @@
 <template>
-    <div class="">
-        <div class="">
-            <AuthView v-if="!$store.state.isLogin && !$store.state.isSignUp"/>
-            <MypageView v-if="$store.state.isLogin && !$store.state.isSignUp"/>
-            <SignUpView v-if="$store.state.isSignUp"/>
-        </div>
-    </div>
-
+    <AuthView v-if="!$store.state.isLogin && !$store.state.isSignUp"/>
+    <MypageView v-if="$store.state.isLogin && !$store.state.isSignUp"/>
+    <SignUpView v-if="$store.state.isSignUp"/>
 </template>
 
 <script>
@@ -60,5 +55,5 @@ import SignUpView from './SignUpView.vue';
 </script>
 
 <style>
-@import '../../assets/css/common.css';
+/* @import '../../assets/css/common.css'; */
 </style>

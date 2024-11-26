@@ -1,23 +1,29 @@
 <template>
-    <h2 class="mb-l">買い物リスト</h2>
-    <div class="request-list pd-m pstrl" v-if="this.$store.state.isLogin">
-        <button @click="changeList" class="change-btn pstab"><fa icon="rotate" />{{ showListName }}リスト表示中</button>
-        <div>
-            <table class="request-table">
-                <tr>
-                    <th>商品名</th>
-                    <th>登録日</th>
-                    <th>登録者</th>
-                    <th>購入状況</th>
-                </tr>
-                <RequestItem v-for="item in returnShowList" :key="item.id" :item="item"/>
-            </table>
-            <button @click="compShopping">買い物を完了する</button>
+    <div class="col-8">
+        <h2 class="mb-5">買い物リスト</h2>
+        <div class="position-relative" v-if="this.$store.state.isLogin">
+            <button @click="changeList" class="btn btn-dark position-absolute chenge-icon"><fa icon="rotate" />{{ showListName }}リスト表示中</button>
+            <div class="justify-content-center">
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>商品名</th>
+                        <th>登録日</th>
+                        <th>登録者</th>
+                        <th>購入状況</th>
+                    </tr>
+                    <RequestItem v-for="item in returnShowList" :key="item.id" :item="item"/>
+                </table>
+                <div class="container row justify-content-between align-item-center">
+                    <div class="col-3">
+                        <button @click="compShopping" class="btn btn-danger">買い物を完了する</button>
+                    </div>
+                    <NewRequest/>
+                </div>
+            </div>
         </div>
-        <NewRequest/>
-    </div>
-    <div v-else>
-        <p>購入リストを表示するにはログインが必要です</p>
+        <div v-else>
+            <p>購入リストを表示するにはログインが必要です</p>
+        </div>
     </div>
 </template>
 
@@ -99,7 +105,11 @@ import axios from 'axios';
 </script>
 
 <style>
-    .request-list{
+    .chenge-icon{
+        top: -50px;
+        right: 0;
+    }
+    /* .request-list{
         background-color: rgb(202, 116, 35);
         border-radius: 10px;
 
@@ -117,5 +127,5 @@ import axios from 'axios';
     }
     .request-table th,.request-table td{
         border: 0px;
-    }
+    } */
 </style>

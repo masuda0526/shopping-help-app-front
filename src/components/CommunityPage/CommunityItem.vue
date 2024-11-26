@@ -1,15 +1,12 @@
 <template>
-    <div class="card">
-        <div class="card-inner">
-            <h2 class="card-title">{{item.community_name}}
-                <fa v-if="isListOpen" icon="angle-down" class="icon" @click="toggleIsOpen" />
-                <fa v-else icon="angle-up" class="icon" @click="toggleIsOpen" />
-            </h2>
-            <div class="card-body" v-if="isListOpen">
-                <p class="card-member" v-for="member in item.member" :key="member.user_id">{{member.name}}</p>
-            </div>
-        </div>
-
+    <div class="card mb-3">
+        <h3 class="card-header">{{item.community_name}}
+            <fa v-if="isListOpen" icon="angle-down" class="icon" @click="toggleIsOpen" />
+            <fa v-else icon="angle-up" class="icon" @click="toggleIsOpen" />
+        </h3>
+        <ul class="list-group" v-if="isListOpen">
+            <li class="list-group-item" v-for="member in item.member" :key="member.user_id">{{member.name}}</li>
+        </ul>
     </div>
 </template>
 

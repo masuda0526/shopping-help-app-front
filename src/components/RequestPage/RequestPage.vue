@@ -1,7 +1,5 @@
 <template>
-    <div class="w70 mauto">
-        <RequestList/>
-    </div>
+    <RequestList/>
 </template>
 
 <script>

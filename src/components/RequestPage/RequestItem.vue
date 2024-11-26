@@ -3,8 +3,8 @@
         <td>{{item.product_name}}</td>
         <td>{{item.created_at}}</td>
         <td>{{item.name}}</td>
-        <td v-if="item.inCart && item.inCart_user_id == this.$store.state.userInfo.id" @click="toggleInCart"><fa icon="circle-check" />選択済</td>
-        <td v-else-if="item.inCart && item.inCart_user_id != this.$store.state.userInfo.id">ほかの人がカートへ入れてます</td>
+        <td v-if="item.inCart && item.inCart_user_id == this.$store.state.userInfo.id" @click="toggleInCart" class="text-secondary"><fa icon="circle-check" />選択済</td>
+        <td v-else-if="item.inCart && item.inCart_user_id != this.$store.state.userInfo.id" class="text-danger">ほかの人がカートへ入れてます</td>
         <td v-else @click="toggleInCart"><fa icon="cart-arrow-down" />カートへ</td>
     </tr>
 </template>

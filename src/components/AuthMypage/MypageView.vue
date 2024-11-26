@@ -1,26 +1,26 @@
 <template>
-    <div class="mauto" style="width: 70%;">
-        <h2>マイページ</h2>
-        <div>
-            <div class="w30 boxsi fl user-info bgwhite">
-                <h2>{{$store.state.userInfo.name}}さんの情報</h2>
+    <div class="col-6">
+        <h2 class="mb-3">マイページ</h2>
+        <div class="container row">
+            <div class="col-3 p-3">
+                <h3 class="">{{$store.state.userInfo.name}}さんの情報</h3>
                 <div>
                     <p>お名前：{{$store.state.userInfo.name}}</p>
                     <p>メールアドレス：{{$store.state.userInfo.email}}</p>
                     <p>電話番号：{{$store.state.userInfo.tel}}</p>
                 </div>
                 <div class="">
-                    <button class="btn yl fr" @click="logout">ログアウト</button>
+                    <button class="btn btn-warning" @click="logout"><fa icon="arrow-right-from-bracket" />ログアウト</button>
                 </div>
             </div>
-            <div class="w60 boxsi fr shopping-list">
-                <h2>マイ買い物リスト</h2>
-                <table>
+            <div class="col-9 p-3">
+                <h3>マイ買い物リスト</h3>
+                <table class="table table-striped">
                     <tr>
                         <th>商品名</th>
                         <th>追加日</th>
                     </tr>
-                    <tr class="mb-s" v-for="req in returnMyRequest" :key="req.id">
+                    <tr class="" v-for="req in returnMyRequest" :key="req.id">
                         <td>{{req.product_name}}</td>
                         <td>{{ req.created_at }}</td>
                     </tr>
@@ -78,7 +78,7 @@ export default{
 </script>
 
 <style>
-.user-info,.shopping-list{
+/* .user-info,.shopping-list{
     text-align: left;
     padding: 10px;
     border-radius: 10px;
@@ -101,5 +101,5 @@ td,th{
     text-align: center;
     background-color: white;
     border-radius: 5px;
-}
+} */
 </style>

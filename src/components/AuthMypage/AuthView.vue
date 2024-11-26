@@ -1,28 +1,34 @@
 <template>
-    <div class="w40 mauto">
-        <h2 class="">ログインページ</h2>
-        <div class="login-inner ">
-            <p class="mb-l">マイページを表示するには、ログインが必要です。</p>
-            <div v-if="this.isError" class="error-body">
-                <p class="error-text" v-for="err, i in showErrorMsg" v-bind:key="i">{{ err }}</p>
+    <div class="p-1 col-4">
+        <h2 class="mb-5">ログインページ</h2>
+        <div class="container">
+            <p class="mb-3">マイページを表示するには、ログインが必要です。</p>
+            
+            <div v-if="this.isError" class="text-danger bg-danger-subtle p-2 ">
+                <p class="text-start" v-for="err, i in showErrorMsg" v-bind:key="i">{{ err }}</p>
             </div>
-            <label for="" class="mb-s login-label">
-                メールアドレス or 電話番号
-                <input type="text" id="" v-model="inputText.inputinfo">
-            </label>
-            <label for="" class="mb-l login-label">
-                パスワード
-                <input type="password" id="" v-model="inputText.inputpass">
-            </label>
-            <div>
-                <button class="btn gr" @click="login">ログイン</button>
+
+            <div class="mb-3">
+                <label for="" class="row">メールアドレス or 電話番号</label>
+                <input type="text" id="" v-model="inputText.inputinfo" class="row form-control-lg col-12">
             </div>
-            <!-- <div class="login-tosignup"> -->
-                <a @click.prevent="toSignUp" class="login-tosignup">新規登録...</a>
-            <!-- </div> -->
+
+            <div class="mb-3">
+                <label for="" class="row mb-3">パスワード</label>
+                <input type="password" id="" v-model="inputText.inputpass" class="form-control-lg row col-12">
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary" @click="login">ログイン</button>
+                </div>
+                <div class="col">
+                    <a @click.prevent="toSignUp" class="login-tosignup">新規登録...</a>
+                </div>
+            </div>
         </div>
     </div>
-    </template>
+</template>
 
 <script>
     import axios from 'axios';
@@ -104,7 +110,7 @@
 </script>
 
 <style>
-.login-inner{
+/* .login-inner{
     width: 70%;
     margin: 0 auto;
 }
@@ -122,5 +128,5 @@
     transform: scale(1.2);
     color: rgb(106, 53, 192);
     transition: all 0.5s;
-}
+} */
 </style>

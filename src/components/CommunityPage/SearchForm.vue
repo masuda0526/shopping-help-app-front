@@ -1,15 +1,15 @@
 <template>
     <div>
-        <div v-if="!this.isSearchMode">
-            <fa icon="magnifying-glass-plus" @click="toggleSearch"/>
+        <div v-if="!this.isSearchMode" class="" @click="toggleSearch">
+            <fa icon="magnifying-glass-plus" />コミュニティーを検索
         </div>
         <div v-else>
-            <div>
+            <div class="mb-3">
                 <fa icon="magnifying-glass" />
                 <input type="text" name="searchText" id="" v-model="searchText">
             </div>
             <div>
-                <table>
+                <table class="table">
                     <tr>
                         <th>コミュニティー</th>
                         <th>参加状況</th>
