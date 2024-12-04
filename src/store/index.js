@@ -7,6 +7,7 @@ export default createStore({
     isSignUp:false,
     isLogin:false,
     isError:false,
+    debugFlg:true,
     showErrMsg:[],
     ERR_MSG_LIST:{
       require:"未入力の入力必須項目があります。",
@@ -18,6 +19,7 @@ export default createStore({
     userInfo:{},
     requestInfo:{},
     communityList:{},
+    joinCommunityIds:[],
     allCommunityList:{},
     FLASH_MSG:""
   },
@@ -78,6 +80,9 @@ export default createStore({
         // let i = 0;
         res.data.forEach((elm) => {
           // console.log(elm);
+          if(elm.user_id === state.userInfo.id && !state.joinCommunityIds.includes(elm.community_id)){
+            state.joinCommunityIds.push(elm.community_id);
+          }
             if(idCnt !== elm.community_id){
               let tmpList = {};
               let tmpMemberList = [];
@@ -107,7 +112,14 @@ export default createStore({
         }).catch(err => {
           console.log(err);
         })
+    },
+    // デバッグ用の関数です。開発終了後はstate内のdebugFlgをfalseに変更すること！
+    debug(state, str){
+      if(state.debugFlg){
+        console.log(str);
+      }
     }
+
   },
   actions: {
   },

@@ -18,7 +18,7 @@
                 </table>
             </div>
         </div>
-</div>
+    </div>
 </template>
 
 <script>
@@ -39,7 +39,11 @@ import SearchItem from './SearchItem.vue';
             toggleSearch(){
                 this.isSearchMode = !this.isSearchMode;
             },
-            
+            checkCommunity(){
+                this.$store.state.communityList.forEach(c => {
+                    this.joinCommunityIDs[this.joinCommunityIDs.length] = c.community_id;
+                })
+            },
         },
         computed:{
             searchResultList(){
@@ -59,11 +63,10 @@ import SearchItem from './SearchItem.vue';
             },
         },
         mounted:function(){
-            this.$store.state.communityList.forEach(c => {
-                console.log(c.community_id);
-                this.joinCommunityIDs[this.joinCommunityIDs.length] = c.community_id;
-            })
-            console.log(this.joinCommunityIDs);
+            // this.$store.state.communityList.forEach(c => {
+            //     this.joinCommunityIDs[this.joinCommunityIDs.length] = c.community_id;
+            // })
+            this.checkCommunity();
         }
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="card mb-3">
+    <div class="card mb-3 col-sm-5 p-0 ">
         <h3 class="card-header">{{item.community_name}}
             <fa v-if="isListOpen" icon="angle-down" class="icon" @click="toggleIsOpen" />
             <fa v-else icon="angle-up" class="icon" @click="toggleIsOpen" />

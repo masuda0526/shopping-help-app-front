@@ -1,29 +1,29 @@
 <template>
-    <div class="p-1 col-4">
+    <div class="p-1 col-sm-6 mx-auto">
         <h2 class="mb-5">ログインページ</h2>
-        <div class="container">
-            <p class="mb-3">マイページを表示するには、ログインが必要です。</p>
+        <div class="container bg-gray">
+            <p class="mb-4">マイページを表示するには、ログインが必要です。</p>
             
             <div v-if="this.isError" class="text-danger bg-danger-subtle p-2 ">
                 <p class="text-start" v-for="err, i in showErrorMsg" v-bind:key="i">{{ err }}</p>
             </div>
 
-            <div class="mb-3">
-                <label for="" class="row">メールアドレス or 電話番号</label>
-                <input type="text" id="" v-model="inputText.inputinfo" class="row form-control-lg col-12">
+            <div class="mb-3 row">
+                <label for="" class="col-sm-4">メールアドレス or 電話番号</label>
+                <input type="text" id="" v-model="inputText.inputinfo" class="form-control-lg col-sm-8">
             </div>
 
-            <div class="mb-3">
-                <label for="" class="row mb-3">パスワード</label>
-                <input type="password" id="" v-model="inputText.inputpass" class="form-control-lg row col-12">
+            <div class="mb-3 row">
+                <label for="" class="mb-3 col-sm-4">パスワード</label>
+                <input type="password" id="" v-model="inputText.inputpass" class="form-control-lg col-sm-8">
             </div>
 
-            <div class="row">
+            <div class="row justify-content-around">
                 <div class="col">
-                    <button class="btn btn-primary" @click="login">ログイン</button>
+                    <a @click.prevent="toSignUp" class="btn btn-link">新規登録...</a>
                 </div>
                 <div class="col">
-                    <a @click.prevent="toSignUp" class="login-tosignup">新規登録...</a>
+                    <button class="btn btn-primary" @click="login">ログイン</button>
                 </div>
             </div>
         </div>
@@ -49,19 +49,19 @@
         },
         methods:{
             validUserInfo:function(){
-                // console.log('validation-----')
+                // バリデーション
                 this.showErrorMsg = [];
                 if(this.inputText.inputinfo == "" || this.inputText.inputpass == ""){
                     this.showErrorMsg.push(this.errorMsg.require);
                     this.isError = true;
+                    this.$store.commit('debug', 'バリデーションNG');
                 }
                 if(!this.showErrorMsg.length > 0){
                     this.isError = false;
+                    this.$store.commit('debug', 'バリデーションOK');
                 }
             },
             login(){
-                // console.log('login----');
-                // console.log(this.inputText);
                 this.validUserInfo();
                 if(!this.isError){
                     this.authCheck(this.inputText.inputinfo, this.inputText.inputpass);
@@ -69,9 +69,14 @@
                 
             },
             authCheck(inputinfo, inputpass){
-                // console.log('authCheck----Start');
-                // console.log(inputinfo);
-                // console.log(inputpass);
+
+                // デバッグ
+                this.$store.commit('debug', 'ログイン処理開始');
+                this.$store.commit('debug', '＜登録内容＞');
+                this.$store.commit('debug', 'Email or TEL : ' + this.inputText.inputinfo);
+                this.$store.commit('debug', 'パスワード : ' + this.inputText.inputpass);
+                this.$store.commit('debug', '＜登録内容（ここまで）＞');
+
                 axios.get(this.$store.state.BASE_URL + "auth", {
                     params:{
                         auth_info:inputinfo,
@@ -94,16 +99,19 @@
                     .catch(error => {
                         console.log(error);
                     })
+                    this.$store.commit('debug', 'ログイン処理終了');
             },
             loginFailed(){
-                // this.$set(this.showErrorMsg, this.showErrorMsg.length, this.errorMsg.nomatch);
+                this.$store.commit('debug', 'ログイン失敗');
                 this.showErrorMsg.push(this.errorMsg.nomatch);
                 this.isError = true;
                 this.$store.commit('loginFalse');
             },
             toSignUp(){
+                this.$store.commit('debug', 'サインアップ処理開始');
                 // console.log('signUP--Start');
                 this.$store.commit('signUpTrue');
+                this.$store.commit('debug', 'サインアップ処理終了');
             }
         }
     }

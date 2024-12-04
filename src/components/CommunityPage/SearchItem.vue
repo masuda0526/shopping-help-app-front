@@ -1,56 +1,44 @@
 <template>
     <tr>
-        <td>
-            {{ cmnty.community_name }}
+        <td >
+            <div class="position-relative" v-on:mouseover="showExpl(index)" v-on:mouseleave="hideExpl(index)">
+                {{ cmnty.community_name }}
+                <span class="text-primary position-absolute" v-if="isShowExpl && showIndex === index" style="right: 0; top: -15px;">
+                    {{ cmnty.com_expl }}
+                </span>
+            </div>
         </td>
         <td>
-            <button v-if="!checkJoin" class="btn btn-link">参加する</button>
-            <span v-else class="text-secondary">参加中</span>
+            <CommunityJoinAuthForm :community_id="cmnty.id" :com_auth_id="cmnty.com_auth_id"/>
         </td>
     </tr>
 </template>
 
 <script>
-
-</script>
-
-<script>
-    import axios from 'axios';
+import CommunityJoinAuthForm from './CommunityJoinAuthForm.vue';
+    // import axios from 'axios';
     export default{
         data:function(){
             return{
-                
+                isShowExpl:false,
+                showIndex:null,
+                joinMode:false,
+                com_auth_id:""
             }
+        },
+        components:{
+            CommunityJoinAuthForm
         },
         props:['cmnty', 'joinCommunityIDs'],
         methods:{
-            joinCommunity(){
-                axios.get(this.$store.state.BASE_URL + 'community/join', {
-                    params:{
-                        community_id:this.cmnty.community_id,
-                        user_id:this.$store.state.userInfo.id
-                    }
-                }).then(res => {
-                    if(res.data){
-                        console.log("joinOK");
-                    }else{
-                        console.log("joinNG");
-                    }
-                }).catch(err => {
-                    console.log(err);
-                })
+            showExpl(index){
+                this.isShowExpl = true;
+                this.showIndex = index;
+            },
+            hideExpl(){
+                this.isShowExpl = false;
+                this.showIndex = null;
             }
-        },
-        computed:{
-            checkJoin(){
-                let result = false;
-                this.joinCommunityIDs.forEach(id => {
-                    if(id == this.cmnty.id){
-                        result = true;
-                    }
-                });
-                return result;
-            }
-        },
+        }
     }
 </script>

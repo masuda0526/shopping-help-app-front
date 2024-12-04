@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="row row-cols-2 justify-content-around">
         <CommunityItem  v-for="item in this.$store.state.communityList" :key="item.community_id" :item="item"/>
     </div>
 

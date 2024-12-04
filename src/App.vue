@@ -1,10 +1,11 @@
 <template>
   <nav>
+    <router-link to="/test">テスト用</router-link>|
     <router-link to="/community">コミュニティー</router-link>|
     <router-link to="/request">リクエスト</router-link>|
     <router-link to="/mypage">マイページ</router-link>
   </nav>
-  <div class="d-flex justify-content-center">
+  <div class="">
     <router-view/>
   </div>
 </template>

@@ -1,40 +1,38 @@
 <template>
-    <div class="col-6">
+    <div class="col-sm-6 text-align-center mx-auto">
         <h2 class="mb-3">新規登録</h2>
         <div>
             <div class="text-danger" v-if="this.isError">
                 <p v-for="err, i in this.showErrMsg" :key = i>{{ err }}</p>
             </div>
             <table class="table">
-                <tr>
-                    <th>名前</th>
-                    <td><input class="form-control" type="text" name="name" v-model="name"></td>
+                <tr class="row">
+                    <th class="col-sm-4">名前</th>
+                    <td class="col-sm-8"><input class="form-control" type="text" name="name" v-model="name"></td>
                 </tr>
-                <tr>
-                    <th>メールアドレス</th>
-                    <td><input class="form-control" type="text" name="email" v-model="email"></td>
+                <tr class="row">
+                    <th class="col-sm-4">メールアドレス</th>
+                    <td class="col-sm-8"><input class="form-control" type="text" name="email" v-model="email"></td>
                 </tr>
-                <tr>
-                    <th>電話番号</th>
-                <td>
-                    <input class="form-control" type="text" name="tel" v-model="tel">
-                </td>
-            </tr>
-            <tr>
-                <th>パスワード</th>
-                <td><input class="form-control" type="password" name="pass" v-model="pass"></td>
-            </tr>
-            <tr>
-                <th>パスワード（確認用）</th>
-                <td><input class="form-control" type="password" name="repass" v-model="repass"></td>
-            </tr>
-        </table>
-        <div class="d-flex justify-content-between">
-            <button class="btn btn-success" @click="signup">新規登録</button>
-            <button class="btn btn-link" @click="returnLoginPage"><fa icon="rotate-left" />ログインページへ</button>
-        </div>
+                <tr class="row">
+                    <th class="col-sm-4">電話番号</th>
+                    <td class="col-sm-8"><input class="form-control" type="text" name="tel" v-model="tel"></td>
+                </tr>
+                <tr class="row">
+                    <th class="col-sm-4">パスワード</th>
+                    <td class="col-sm-8"><input class="form-control" type="password" name="pass" v-model="pass"></td>
+                </tr>
+                <tr class="row">
+                    <th class="col-sm-4">パスワード（確認用）</th>
+                    <td class="col-sm-8"><input class="form-control" type="password" name="repass" v-model="repass"></td>
+                </tr>
+            </table>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-success" @click="signup">新規登録</button>
+                <button class="btn btn-link" @click="returnLoginPage"><fa icon="rotate-left" />ログインページへ</button>
+            </div>
 
-    </div>
+        </div>
     </div>
 </template>
 
@@ -63,21 +61,23 @@
                 this.showErrMsg = []
                 if(this.name === "" || this.email === "" || this.tel === "" || this.pass === "" || this.repass === ""){
                     this.showErrMsg.push(this.ERR_MSG.requireInput);
-                    this.isError = true
+                    this.isError = true;
+                    this.$store.commit('debug', 'バリデーションNG（未入力項目あり）');
                 }
                 if(this.repass !== this.pass){
                     this.showErrMsg.push(this.ERR_MSG.noMatchPass);
                     this.isError = true;
+                    this.$store.commit('debug', 'バリデーションNG（確認用パスワード不一致）');
                 }
                 if(!this.showErrMsg.length > 0){
                     this.isError = false;
+                    this.$store.commit('debug', 'バリデーションOK');
                 }
             },
             signup(){
-                console.log('signup-----Start!');
-                this.validation();
+                this.$store.commit('debug', 'サインアップ処理開始=========================================');
+                this.validation();//バリデーション
                 if(!this.isError){
-                    // console.log(this.$store.state.BASE_URL + 'signup');
                     axios.get(this.$store.state.BASE_URL + 'signup',{
                         params:{
                             name:this.name,
@@ -86,11 +86,12 @@
                             tel:this.tel
                         }
                     }).then( (res) => {
-                        console.log('AJAX-----OK');
-                        console.log(res);
+                        this.$store.commit('debug', '登録完了');
+                        this.$store.commit('debug', res);
                         this.$store.commit('signUpFalse');
                     }).catch( err => {
-                        console.log(err);
+                        this.$store.commit('debug', '登録失敗');
+                        this.$store.commit('debug', err);
                     })
                 }
             },

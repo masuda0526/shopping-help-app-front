@@ -1,8 +1,8 @@
 <template>
-    <div class="col-6">
-        <h2 class="mb-3">マイページ</h2>
-        <div class="container row">
-            <div class="col-3 p-3">
+    <div class="col-9 mx-auto">
+        <h2 class="mb-5">マイページ</h2>
+        <div class="container row col-sm-12">
+            <div class="col-sm-5">
                 <h3 class="">{{$store.state.userInfo.name}}さんの情報</h3>
                 <div>
                     <p>お名前：{{$store.state.userInfo.name}}</p>
@@ -13,9 +13,9 @@
                     <button class="btn btn-warning" @click="logout"><fa icon="arrow-right-from-bracket" />ログアウト</button>
                 </div>
             </div>
-            <div class="col-9 p-3">
-                <h3>マイ買い物リスト</h3>
-                <table class="table table-striped">
+            <div class="col-sm-7">
+                <h3 class="">マイ買い物リスト</h3>
+                <table class="col-sm-12 table table-striped">
                     <tr>
                         <th>商品名</th>
                         <th>追加日</th>
