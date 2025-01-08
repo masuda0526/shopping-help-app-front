@@ -1,0 +1,19 @@
+.wrapper{
+    width: 375px;
+    padding: 0 10px;
+    margin: 0 auto;
+}
+.bg-glay{
+    background-color: #f5f5f5;
+}
+/* ボタン */
+.button{
+    padding: 10px 40px;
+    border-radius: 25px;
+    font-size: 20px;
+    box-shadow: 2px 3px 2px 1px #999;
+}
+.button-red{
+    background-color: #cc2b2b;
+    color: #fff;
+}

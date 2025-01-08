@@ -4,21 +4,15 @@ import TestVue from '@/components/TestVue.vue'
 import AuthMypage from '@/components/AuthMypage/AuthMypage.vue'
 import RequestPage from '@/components/RequestPage/RequestPage.vue'
 import CommunityPage from '@/components/CommunityPage/CommunityPage.vue'
+import LoginView from '@/components/LoginView.vue'
+import SignUpView from '@/components/SignUpView.vue'
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'home',
-  //   component: HomeView
-  // },
-  // {
-  //   path: '/about',
-  //   name: 'about',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  // },
+  {
+    path: '/',
+    name: 'home',
+    component: LoginView
+  },
   {
     path:'/test',
     name:'test',
@@ -38,6 +32,16 @@ const routes = [
     path:'/community',
     name:'community',
     component:CommunityPage
+  },
+  {
+    path:'/signup',
+    name:'signup',
+    component:SignUpView
+  },
+  {
+    path:'/login',
+    name:'login',
+    component:LoginView
   }
 ]
 

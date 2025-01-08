@@ -1,5 +1,5 @@
 <template>
-    <HeaderView title="TESTページ"></HeaderView>
+    <HeaderView title="ログイン"></HeaderView>
     <LoginComponent />
 </template>
 

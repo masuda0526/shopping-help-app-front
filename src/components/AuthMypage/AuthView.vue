@@ -1,5 +1,5 @@
 <template>
-    <div class="p-1 col-sm-6 mx-auto">
+    <div class="p-1 mx-auto">
         <h2 class="mb-5">ログインページ</h2>
         <div class="container bg-gray">
             <p class="mb-4">マイページを表示するには、ログインが必要です。</p>

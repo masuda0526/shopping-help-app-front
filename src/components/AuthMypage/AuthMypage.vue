@@ -8,7 +8,7 @@
 import AuthView from './AuthView.vue';
 import axios from 'axios';
 import MypageView from './MypageView.vue';
-import SignUpView from './SignUpView.vue';
+import SignUpView from './SignUpComponent.vue';
 
     export default{
         name:'AuthMypage',

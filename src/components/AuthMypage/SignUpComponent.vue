@@ -1,35 +1,33 @@
 <template>
-    <div class="col-sm-6 text-align-center mx-auto">
-        <h2 class="mb-3">新規登録</h2>
+    <div>
         <div>
             <div class="text-danger" v-if="this.isError">
                 <p v-for="err, i in this.showErrMsg" :key = i>{{ err }}</p>
             </div>
-            <table class="table">
-                <tr class="row">
-                    <th class="col-sm-4">名前</th>
-                    <td class="col-sm-8"><input class="form-control" type="text" name="name" v-model="name"></td>
-                </tr>
-                <tr class="row">
-                    <th class="col-sm-4">メールアドレス</th>
-                    <td class="col-sm-8"><input class="form-control" type="text" name="email" v-model="email"></td>
-                </tr>
-                <tr class="row">
-                    <th class="col-sm-4">電話番号</th>
-                    <td class="col-sm-8"><input class="form-control" type="text" name="tel" v-model="tel"></td>
-                </tr>
-                <tr class="row">
-                    <th class="col-sm-4">パスワード</th>
-                    <td class="col-sm-8"><input class="form-control" type="password" name="pass" v-model="pass"></td>
-                </tr>
-                <tr class="row">
-                    <th class="col-sm-4">パスワード（確認用）</th>
-                    <td class="col-sm-8"><input class="form-control" type="password" name="repass" v-model="repass"></td>
-                </tr>
-            </table>
-            <div class="d-flex justify-content-between">
-                <button class="btn btn-success" @click="signup">新規登録</button>
-                <button class="btn btn-link" @click="returnLoginPage"><fa icon="rotate-left" />ログインページへ</button>
+            <div class="bg-glay form-container" >
+                <label>名前</label>
+                <input type="text" name="name" v-model="name">
+                <label>メールアドレス</label>
+                <input type="text" name="email" v-model="email">
+                <label>電話番号</label>
+                <input type="text" name="tel" v-model="tel">
+                <label>パスワード</label>
+                <input type="password" name="pass" v-model="pass">
+                <label>パスワード（確認用）</label>
+                <input type="password" name="repass" v-model="repass">
+                <div class="selectRole">
+                    <div class="selectRole-title">
+                        選択
+                        <div v-bind:class="{'selectRole-content':true, 'selected':!this.isDelevary}" @click="clickIrai">頼む側</div>
+                        <div v-bind:class="{'selectRole-content':true, 'selected':this.isDelevary}" @click="clickDelivery">届ける側</div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="button button-red" @click="signup">新規登録</button>
+                <div style="text-align: right; padding-top: 25px;">
+                    <router-link to="/login">ログインページへ＞</router-link>
+                </div>
             </div>
 
         </div>
@@ -37,7 +35,8 @@
 </template>
 
 <script>
-    import axios from 'axios';
+import router from '@/router';
+import axios from 'axios';
 
     export default{
         data(){
@@ -52,6 +51,7 @@
                 tel:'',
                 pass:'',
                 repass:'',
+                isDelevary:false,
                 showErrMsg:[],
                 isError:false
             }
@@ -89,37 +89,63 @@
                         this.$store.commit('debug', '登録完了');
                         this.$store.commit('debug', res);
                         this.$store.commit('signUpFalse');
+                        router.push({name:'login'});
                     }).catch( err => {
                         this.$store.commit('debug', '登録失敗');
                         this.$store.commit('debug', err);
                     })
                 }
             },
-            returnLoginPage(){
-                this.$store.commit('signUpFalse');
+            clickIrai(){
+                this.isDelevary = false;
+            },
+            clickDelivery(){
+                this.isDelevary = true;
             }
         }
     }
     
 </script>
 
-<style>
-/* .up-title{
+<style scoped>
+label{
+    font-size: 20px;
+}
+input{
+    background-color: #fff;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+input:last-child{
+    margin-bottom: 0;
+}
+.form-container{
+    padding: 50px 10px;
+    margin-bottom: 10px;
+}
+.button-container{
     text-align: center;
 }
-table{
-    border-collapse: collapse;
-    margin: 0 auto;
+.selectRole{
+    font-size: 20px;
 }
-td,th{
-    border: solid 1px;
+.selectRole-title{
+
 }
-th{
-    width: 200px;
-    text-align: left
+.selectRole-content{
+    display: inline-block;
+    background-color: #fff;
+    width: 100px;
+    text-align: center;
+    padding: 10px;
+    margin-left: 40px;
 }
-td{
-    width: 400px;
-    padding: 15px 8px;
-} */
+.selectRole-content:hover{
+    cursor: pointer;
+}
+.selected{
+    background-color: #ffd153;
+}
+
 </style>
