@@ -77,7 +77,11 @@
                             this.$store.commit('placeUserInfo', res.data);
                             this.$store.commit('getCommunityList')
                             this.$store.commit('getAllCommunityList');
-                            router.push({name:'mypage'})
+                            if(res.data.user_type == 0){
+                                router.push({name:'mypage'})
+                            }else{
+                                router.push({name:'mylist'})
+                            }
                         }else{
                             this.loginFailed();
                         }
