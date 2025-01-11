@@ -1,11 +1,11 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 // import HomeView from '../views/HomeView.vue'
 import TestVue from '@/components/TestVue.vue'
-import AuthMypage from '@/components/AuthMypage/AuthMypage.vue'
 import RequestPage from '@/components/RequestPage/RequestPage.vue'
 import CommunityPage from '@/components/CommunityPage/CommunityPage.vue'
 import LoginView from '@/components/LoginView.vue'
 import SignUpView from '@/components/SignUpView.vue'
+import MypageView from '@/components/MypageView.vue'
 
 const routes = [
   {
@@ -17,11 +17,6 @@ const routes = [
     path:'/test',
     name:'test',
     component:TestVue
-  },
-  {
-    path:'/mypage',
-    name:'mypage',
-    component:AuthMypage
   },
   {
     path:'/request',
@@ -42,6 +37,11 @@ const routes = [
     path:'/login',
     name:'login',
     component:LoginView
+  },
+  {
+    path:'/mypage',
+    name:'mypage',
+    component:MypageView
   }
 ]
 

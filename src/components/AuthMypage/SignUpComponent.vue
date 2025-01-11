@@ -18,8 +18,8 @@
                 <div class="selectRole">
                     <div class="selectRole-title">
                         選択
-                        <div v-bind:class="{'selectRole-content':true, 'selected':!this.isDelevary}" @click="clickIrai">頼む側</div>
-                        <div v-bind:class="{'selectRole-content':true, 'selected':this.isDelevary}" @click="clickDelivery">届ける側</div>
+                        <div v-bind:class="{'selectRole-content':true, 'selected':this.user_type === 0}" @click="clickIrai">頼む側</div>
+                        <div v-bind:class="{'selectRole-content':true, 'selected':this.user_type === 1}" @click="clickDelivery">届ける側</div>
                     </div>
                 </div>
             </div>
@@ -44,16 +44,18 @@ import axios from 'axios';
                 ERR_MSG:{
                     requireInput:'未入力の入力必須項目があります',
                     noMailString:'メールアドレスの形式で入力してください',
-                    noMatchPass:'パスワードが一致しません'
+                    noMatchPass:'パスワードが一致しません',
+                    emailDuplicate:'入力されたメールアドレスはすでに登録済みです'
                 },
                 name:'',
                 email:'',
                 tel:'',
                 pass:'',
                 repass:'',
-                isDelevary:false,
+                user_type:0,
                 showErrMsg:[],
-                isError:false
+                isError:false,
+                isCheckEmailDupErr:false,
             }
         },
         methods:{
@@ -69,13 +71,45 @@ import axios from 'axios';
                     this.isError = true;
                     this.$store.commit('debug', 'バリデーションNG（確認用パスワード不一致）');
                 }
+                if(this.isCheckEmailDupErr){
+                    this.showErrMsg.push(this.ERR_MSG.emailDuplicate);
+                    this.isError = true;
+                    this.$store.commit('debug', 'バリデーションNG（登録済みメールアドレス）');
+                }
                 if(!this.showErrMsg.length > 0){
                     this.isError = false;
                     this.$store.commit('debug', 'バリデーションOK');
                 }
             },
-            signup(){
+            checkEmailDuplicate(){
+                console.log('test');
+                let that = this;
+                return new Promise(function(resolve, reject){
+                    // let rslt;
+                    that.$store.commit('debug', '〇Email重複チェック開始');
+                    that.$store.commit('debug', 'パラメータ');
+                    that.$store.commit('debug', that.email);
+                    axios.get(that.$store.state.BASE_URL + 'email/duplicate/check', {
+                        params:{
+                            email:that.email
+                        }
+                    }).then((res) => {
+                        that.$store.commit('debug', "サーバー接続成功");
+                        that.$store.commit('debug', "------重複結果------");
+                        that.$store.commit('debug', res);
+                        that.$store.commit('debug', "-------------------");
+                        that.isCheckEmailDupErr = res.data;
+                        resolve();
+                    }).catch(err => {
+                        that.$store.commit('debug', 'エラー発生');
+                        that.$store.commit('debug', err);
+                        reject();
+                    })
+                })
+            },
+            registUser(){
                 this.$store.commit('debug', 'サインアップ処理開始=========================================');
+                // this.checkEmailDuplicate();
                 this.validation();//バリデーション
                 if(!this.isError){
                     axios.get(this.$store.state.BASE_URL + 'signup',{
@@ -83,12 +117,12 @@ import axios from 'axios';
                             name:this.name,
                             email:this.email,
                             password:this.pass,
-                            tel:this.tel
+                            tel:this.tel,
+                            user_type:this.user_type,
                         }
                     }).then( (res) => {
                         this.$store.commit('debug', '登録完了');
                         this.$store.commit('debug', res);
-                        this.$store.commit('signUpFalse');
                         router.push({name:'login'});
                     }).catch( err => {
                         this.$store.commit('debug', '登録失敗');
@@ -96,11 +130,20 @@ import axios from 'axios';
                     })
                 }
             },
+            // 0:頼む側、1:届ける側
             clickIrai(){
-                this.isDelevary = false;
+                this.user_type = 0;
             },
             clickDelivery(){
-                this.isDelevary = true;
+                this.user_type = 1;
+            },
+            signup(){
+                let that = this;
+                this.checkEmailDuplicate()
+                .then(function(){
+                    that.registUser();
+                })
+                
             }
         }
     }
