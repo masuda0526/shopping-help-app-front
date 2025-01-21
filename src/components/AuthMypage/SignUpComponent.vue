@@ -82,10 +82,8 @@ import axios from 'axios';
                 }
             },
             checkEmailDuplicate(){
-                console.log('test');
                 let that = this;
                 return new Promise(function(resolve, reject){
-                    // let rslt;
                     that.$store.commit('debug', '〇Email重複チェック開始');
                     that.$store.commit('debug', 'パラメータ');
                     that.$store.commit('debug', that.email);
@@ -109,7 +107,6 @@ import axios from 'axios';
             },
             registUser(){
                 this.$store.commit('debug', 'サインアップ処理開始=========================================');
-                // this.checkEmailDuplicate();
                 this.validation();//バリデーション
                 if(!this.isError){
                     axios.get(this.$store.state.BASE_URL + 'signup',{

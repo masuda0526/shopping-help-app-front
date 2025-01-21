@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios';
+import router from '@/router';
 
 export default createStore({
   state: {
@@ -18,6 +19,7 @@ export default createStore({
     },
     userInfo:{},
     requestInfo:{},
+    communityRequest:{},
     communityList:{},
     joinCommunityIds:[],
     allCommunityList:{},
@@ -42,6 +44,11 @@ export default createStore({
     signUpTrue(state){
       state.isSignUp = true;
     },
+    checkLogin(state){
+      if(!state.isLogin){
+        router.push({name:'login'})
+      }
+    },
     // ユーザー情報操作=============================
     placeUserInfo(state,info){
       state.userInfo = info;
@@ -56,7 +63,7 @@ export default createStore({
     initRequestInfo(state){
       state.requestInfo = {}
     },
-    updateRequestInfo(state){
+    getRequestInfo(state){
       axios.get(state.BASE_URL + "request/community", {
         params:{
             id:state.userInfo.id
@@ -66,6 +73,17 @@ export default createStore({
         }).catch(err => {
             console.log(err);
         })
+    },
+    getRequestInfoForMypage(state){
+      axios.get(state.BASE_URL + "request/mypage", {
+        params:{
+          user_id:state.userInfo.id
+        }
+      }).then((res) => {
+          state.communityRequest = res.data;
+      }).catch(err => {
+          console.log(err);
+      })
     },
       // コミュニティー情報操作======================
     getCommunityList(state){
@@ -118,6 +136,10 @@ export default createStore({
       if(state.debugFlg){
         console.log(str);
       }
+    },
+    // マイページへの遷移用関数
+    goMypage(){
+      router.push({name: 'mypage'});
     }
 
   },

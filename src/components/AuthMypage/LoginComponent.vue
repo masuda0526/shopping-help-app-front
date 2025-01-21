@@ -1,5 +1,10 @@
 <template>
     <HeaderView title="ログイン"></HeaderView>
+
+    <div v-if="this.isError" class="text-danger bg-danger-subtle p-2 ">
+        <p class="text-start" v-for="err, i in showErrorMsg" v-bind:key="i">{{ err }}</p>
+    </div>
+
     <div class="form-container bg-glay">
         <label for="">メールアドレスor電話番号</label>
         <input type="text" class="" v-model="inputText.inputinfo">
@@ -48,44 +53,52 @@
             },
             login(){
                 this.validUserInfo();
+                let that = this;
                 if(!this.isError){
-                    this.authCheck(this.inputText.inputinfo, this.inputText.inputpass);
+                    this.$store.commit('debug', '各種情報取得開始');
+                    this.authCheck().then(function(){
+                        that.$store.commit('getRequestInfo');
+                        that.$store.commit('getCommunityList')
+                        that.$store.commit('loginTrue');
+                        that.$store.commit('debug', '各種情報取得終了');
+                        that.$store.commit('debug', 'マイページへ遷移します');
+                        router.push({name:'mypage'});
+                    })
                 }
                 
             },
-            authCheck(inputinfo, inputpass){
-
+            authCheck(){
                 // デバッグ
                 this.$store.commit('debug', 'ログイン処理開始');
                 this.$store.commit('debug', '＜登録内容＞');
                 this.$store.commit('debug', 'Email or TEL : ' + this.inputText.inputinfo);
                 this.$store.commit('debug', 'パスワード : ' + this.inputText.inputpass);
                 this.$store.commit('debug', '＜登録内容（ここまで）＞');
-
-                axios.get(this.$store.state.BASE_URL + "auth", {
-                    params:{
-                        auth_info:inputinfo,
-                        pass:inputpass
-                    }
-                })
-                    .then( res => {
-                        // console.log(res);
-                        if(res.data != ""){
-                            this.$store.commit('loginTrue');
-                            this.$store.commit('initUserInfo');
-                            // console.log(res.data);
-                            this.$store.commit('placeUserInfo', res.data);
-                            this.$store.commit('getCommunityList')
-                            this.$store.commit('getAllCommunityList');
-                            router.push({name:'mypage'})
-                        }else{
-                            this.loginFailed();
+                let that = this;
+                return new Promise(function(resolve, reject){
+                    axios.get(that.$store.state.BASE_URL + "auth", {
+                        params:{
+                            auth_info:that.inputText.inputinfo,
+                            pass:that.inputText.inputpass
                         }
                     })
-                    .catch(error => {
-                        console.log(error);
-                    })
-                    this.$store.commit('debug', 'ログイン処理終了');
+                        .then( res => {
+                            if(res.data != ""){
+                                that.$store.commit('initUserInfo');
+                                that.$store.commit('placeUserInfo', res.data);
+                                resolve();
+                            }else{
+                                that.loginFailed();
+                            }
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            reject();
+                        })
+                        that.$store.commit('debug', 'ログイン処理終了');
+
+                })
+
             },
             loginFailed(){
                 this.$store.commit('debug', 'ログイン失敗');

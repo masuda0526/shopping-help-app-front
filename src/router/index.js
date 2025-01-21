@@ -6,6 +6,7 @@ import CommunityPage from '@/components/CommunityPage/CommunityPage.vue'
 import LoginView from '@/components/LoginView.vue'
 import SignUpView from '@/components/SignUpView.vue'
 import MypageView from '@/components/MypageView.vue'
+import ShoppingView from '@/components/ShoppingView.vue'
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path:'/mypage',
     name:'mypage',
     component:MypageView
+  },
+  {
+    path:'/shopping',
+    name:'shopping',
+    component:ShoppingView
   }
 ]
 

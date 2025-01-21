@@ -2,9 +2,16 @@
     width: 375px;
     padding: 0 10px;
     margin: 0 auto;
+    margin-bottom: 50px;
 }
 .bg-glay{
     background-color: #f5f5f5;
+}
+/* float解除用 */
+.clear::after{
+    content: '';
+    clear: both;
+    display: block;
 }
 /* ボタン */
 .button{
@@ -16,4 +23,51 @@
 .button-red{
     background-color: #cc2b2b;
     color: #fff;
+}
+.button-green{
+    background-color: #669462;
+    color: #fff;
+}
+.button-blue{
+    background-color: #4766ff;
+    color: #fff;
+}
+.button-yellow{
+    background-color: #ffd153;
+    color: #000;
+}
+
+/* カード */
+.comCard{
+    background-color: #fbfbfb;
+    box-shadow: 2px 2px 2px 2px #999;
+    border-radius: 5px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+.comCard h3{
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+.comCard-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #000;
+    padding: 5px;
+    margin-bottom: 12px;
+}
+.comCard-item p{
+    margin: 0;
+}
+.comCard-product{
+    width: 220px;
+    display: flex;
+    justify-content: space-between;
+}
+.comCard-item button{
+    text-align: center;
+    width: 94px;
+    font-size: 20px;
+    padding: 5px 0;
 }
