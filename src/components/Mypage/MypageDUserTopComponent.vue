@@ -1,6 +1,6 @@
 <template>
     <div class="box">
-        <button class="button button-green">みんなの購入リスト</button>
+        <button class="button button-green" @click="goRequestList">みんなの購入リスト</button>
         <button class="button button-red" @click="goShopping">買い物する</button>
     </div>
 </template>
@@ -17,6 +17,9 @@ export default{
     methods:{
         goShopping(){
             router.push({name:'shopping'});
+        },
+        goRequestList(){
+            router.push({name:'requestlist'})
         }
     }
     

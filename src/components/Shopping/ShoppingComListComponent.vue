@@ -53,9 +53,3 @@ import axios from 'axios';
         }
     }
 </script>
-
-<style scoped>
-.pos-r{
-    float: right;
-}
-</style>

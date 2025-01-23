@@ -58,7 +58,8 @@
                     this.$store.commit('debug', '各種情報取得開始');
                     this.authCheck().then(function(){
                         that.$store.commit('getRequestInfo');
-                        that.$store.commit('getCommunityList')
+                        that.$store.commit('getCommunityList');
+                        that.$store.commit('getRequestInfoForMypage');
                         that.$store.commit('loginTrue');
                         that.$store.commit('debug', '各種情報取得終了');
                         that.$store.commit('debug', 'マイページへ遷移します');

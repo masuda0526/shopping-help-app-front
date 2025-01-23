@@ -75,6 +75,8 @@ export default createStore({
         })
     },
     getRequestInfoForMypage(state){
+      console.log('state.userInfo.id')
+      console.log(state.userInfo.id)
       axios.get(state.BASE_URL + "request/mypage", {
         params:{
           user_id:state.userInfo.id

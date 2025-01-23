@@ -20,6 +20,12 @@
     font-size: 20px;
     box-shadow: 2px 3px 2px 1px #999;
 }
+.button-s{
+    padding: 3px 20px;
+    border-radius: 25px;
+    font-size: 20px;
+    box-shadow: 2px 3px 2px 1px #999;
+}
 .button-red{
     background-color: #cc2b2b;
     color: #fff;
@@ -35,6 +41,9 @@
 .button-yellow{
     background-color: #ffd153;
     color: #000;
+}
+.pos-r{
+    float: right;
 }
 
 /* カード */
@@ -61,7 +70,6 @@
     margin: 0;
 }
 .comCard-product{
-    width: 220px;
     display: flex;
     justify-content: space-between;
 }

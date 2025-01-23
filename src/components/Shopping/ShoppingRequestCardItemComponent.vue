@@ -1,6 +1,6 @@
 <template>
     <div class="comCard-item">
-        <div class="comCard-product">
+        <div class="comCard-product setw">
             <p>{{item.product_name}}</p>
             <p>{{ showVolAndUnit }}</p>
         </div>
@@ -46,3 +46,9 @@ export default{
     }
 }
 </script>
+
+<style scoped>
+.setw{
+    width: 220px;
+}
+</style>
