@@ -9,6 +9,8 @@ import MypageView from '@/components/MypageView.vue'
 import ShoppingView from '@/components/ShoppingView.vue'
 import MyListView from '@/components/MyListView.vue'
 import RequestListView from '@/components/RequestListView.vue'
+import DeliveryView from '@/components/DeliveryView.vue'
+import ConfilmView from '@/components/ConfilmView.vue'
 
 const routes = [
   {
@@ -60,6 +62,16 @@ const routes = [
     path:'/requestlist',
     name:'requestlist',
     component:RequestListView
+  },
+  {
+    path:'/delivery',
+    name:'delivery',
+    component:DeliveryView
+  },
+  {
+    path:'/confilm',
+    name:'confilm',
+    component:ConfilmView
   }
 ]
 

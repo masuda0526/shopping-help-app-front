@@ -29,7 +29,7 @@ export default{
             }).then((res) => {
                 if(res){
                     // console.log('toggleInCart----OK');
-                    this.$store.commit('getRequestInfoForMypage');
+                    this.$store.commit('getStartShoppingList');
                     this.isInCart = !this.isInCart;
                 }else{
                     // console.log('toggleInCart----NG');

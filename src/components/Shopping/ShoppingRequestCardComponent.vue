@@ -14,6 +14,17 @@ export default{
 
         }
     },
+    methods:{
+        checkBuiedItem(rl){
+            let cnt = 0
+            for(let ri of rl){
+                if(!ri.isbuy){
+                    cnt++
+                }
+            }
+            return cnt;
+        },
+    },
     props:['memberData'],
     components:{
         ShoppingRequestCardItemComponent
