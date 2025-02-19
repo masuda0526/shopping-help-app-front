@@ -30,7 +30,7 @@
     }
     h2{
         font-size: 32px;
-        margin-bottom: 10px;
+        margin-bottom: 30px;
         text-align: center;
     }
 </style>

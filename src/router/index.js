@@ -12,12 +12,13 @@ import RequestListView from '@/components/RequestListView.vue'
 import DeliveryView from '@/components/DeliveryView.vue'
 import ConfilmView from '@/components/ConfilmView.vue'
 import UserLinkView from '@/components/UserLinkView.vue'
+import HomeView from '@/views/HomeView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: LoginView
+    component: HomeView
   },
   {
     path:'/test',

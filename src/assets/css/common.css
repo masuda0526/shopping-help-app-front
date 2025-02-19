@@ -26,6 +26,11 @@
     font-size: 20px;
     box-shadow: 2px 3px 2px 1px #999;
 }
+.button-square{
+    padding: 10px 20px;
+    font-size: 20px;
+    box-shadow: 2px 3px 2px 1px #999;
+}
 .button-red{
     background-color: #cc2b2b;
     color: #fff;
