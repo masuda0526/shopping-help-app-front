@@ -11,6 +11,7 @@ import MyListView from '@/components/MyListView.vue'
 import RequestListView from '@/components/RequestListView.vue'
 import DeliveryView from '@/components/DeliveryView.vue'
 import ConfilmView from '@/components/ConfilmView.vue'
+import UserLinkView from '@/components/UserLinkView.vue'
 
 const routes = [
   {
@@ -72,6 +73,11 @@ const routes = [
     path:'/confilm',
     name:'confilm',
     component:ConfilmView
+  },
+  {
+    path:'/userlink',
+    name:'userlink',
+    component:UserLinkView,
   }
 ]
 

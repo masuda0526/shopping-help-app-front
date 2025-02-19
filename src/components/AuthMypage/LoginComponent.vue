@@ -63,6 +63,10 @@
                         that.$store.commit('loginTrue');
                         that.$store.commit('debug', '各種情報取得終了');
                         that.$store.commit('debug', 'マイページへ遷移します');
+                        that.$store.commit('debug', 'フラッシュメッセージ登録');
+                        that.$store.commit('registSuccessMsg', 'ログイン成功！');
+                        that.$store.commit('debug', '登録したフラッシュメッセージ');
+                        that.$store.commit('debug', that.$store.state.flashMsg);
                         router.push({name:'mypage'});
                     })
                 }

@@ -36,6 +36,11 @@ export default createStore({
       seq:0,
       r_uid:0,
       b_uid:0
+    },
+    flashMsg:{
+      errFlg:false,
+      msgText:"",
+      key:0
     }
   },
   getters: {
@@ -242,6 +247,24 @@ export default createStore({
     },
     delTmpData(state, data){
       delete state.tmpData[data.prpname];
+    },
+    registSuccessMsg(state, text){
+      state.flashMsg.errFlg = false;
+      state.flashMsg.msgText = "";
+      state.flashMsg.errFlg = false;
+      state.flashMsg.msgText = text;
+      state.flashMsg.key +=1;
+    },
+    registErrorMsg(state, text){
+      state.flashMsg.errFlg = false;
+      state.flashMsg.msgText = "";
+      state.flashMsg.errFlg = true;
+      state.flashMsg.msgText = text;
+      state.flashMsg.key +=1;
+    },
+    deleteFlashMsg(state){
+      state.flashMsg.errFlg = false;
+      state.flashMsg.msgText = "";
     }
   },
   actions: {
