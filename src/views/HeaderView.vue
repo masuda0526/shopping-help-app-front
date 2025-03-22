@@ -32,5 +32,6 @@
         font-size: 32px;
         margin-bottom: 30px;
         text-align: center;
+        white-space: pre-wrap;
     }
 </style>

@@ -62,12 +62,17 @@
                         that.$store.commit('getRequestInfoForMypage');
                         that.$store.commit('loginTrue');
                         that.$store.commit('debug', '各種情報取得終了');
-                        that.$store.commit('debug', 'マイページへ遷移します');
                         that.$store.commit('debug', 'フラッシュメッセージ登録');
                         that.$store.commit('registSuccessMsg', 'ログイン成功！');
                         that.$store.commit('debug', '登録したフラッシュメッセージ');
                         that.$store.commit('debug', that.$store.state.flashMsg);
-                        router.push({name:'mypage'});
+                        if(that.$store.state.userInfo.user_type == 0){
+                            that.$store.commit('debug', 'マイページへ遷移します');
+                            router.push({name:'mypage'});
+                        }else{
+                            that.$store.commit('debug', '依頼者用買い物リスト画面へ遷移します');
+                            router.push({name:'personalshoplist'});
+                        }
                     })
                 }
                 

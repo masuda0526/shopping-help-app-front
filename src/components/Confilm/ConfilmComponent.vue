@@ -37,6 +37,10 @@ export default{
                 case 2:
                     this.acceptDelivaryByRequestUserId();
                     break;
+                case 3:
+                    this.acceptRecieve();
+                    break;
+
                 default:
                     this.$store.commit('debug', '不正なアクセスの可能性があります。');
             }
@@ -78,6 +82,26 @@ export default{
                 this.$store.commit('debug', 'エラー発生。エラー内容。');
                 this.$store.commit('debug', err);
             })
+        },
+        acceptRecieve(){
+            let buyCode = this.$store.state.confirmFlgs.buycode;
+            let seqNum = this.$store.state.confirmFlgs.seq;
+            this.$store.commit('debug', 'buycodeで最終確認処理を行います。(acceptRecieve)');
+            axios.get(this.$store.state.BASE_URL + 'completerecieve', {
+                params:{
+                    buycode: buyCode,
+                    seq: seqNum
+                }
+            }).then(data => {
+                this.$store.commit('debug', '登録成功。返却されたデータ。')
+                this.$store.commit('debug', data);
+                this.$store.commit('debug', 'マイページへ遷移します。')
+                router.push({name:'personalshoplist'});
+            }).catch(err => {
+                this.$store.commit('debug', 'エラー発生。エラー内容。');
+                this.$store.commit('debug', err);
+            })
+            router.push({name:'personalshoplist'});
         }
     }
 }

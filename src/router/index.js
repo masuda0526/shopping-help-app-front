@@ -7,12 +7,13 @@ import LoginView from '@/components/LoginView.vue'
 import SignUpView from '@/components/SignUpView.vue'
 import MypageView from '@/components/MypageView.vue'
 import ShoppingView from '@/components/ShoppingView.vue'
-import MyListView from '@/components/MyListView.vue'
+import PersonalShopListView from "@/components/PersonalShopListView.vue";
 import RequestListView from '@/components/RequestListView.vue'
 import DeliveryView from '@/components/DeliveryView.vue'
 import ConfilmView from '@/components/ConfilmView.vue'
 import UserLinkView from '@/components/UserLinkView.vue'
 import HomeView from '@/views/HomeView.vue'
+import RecieveView from '@/components/RecieveView.vue'
 
 const routes = [
   {
@@ -51,9 +52,9 @@ const routes = [
     component:MypageView
   },
   {
-    path:'/mylist',
-    name:'mylist',
-    component:MyListView
+    path: "/personalshoplist",
+    name: "personalshoplist",
+    component: PersonalShopListView,
   },
   {
     path:'/shopping',
@@ -79,6 +80,11 @@ const routes = [
     path:'/userlink',
     name:'userlink',
     component:UserLinkView,
+  },
+  {
+    path:'/recieve',
+    name:'recieve',
+    component:RecieveView,
   }
 ]
 
