@@ -18,8 +18,8 @@
                 <div class="selectRole">
                     <div class="selectRole-title">
                         選択
-                        <div v-bind:class="{'selectRole-content':true, 'selected':this.user_type === 0}" @click="clickIrai">頼む側</div>
-                        <div v-bind:class="{'selectRole-content':true, 'selected':this.user_type === 1}" @click="clickDelivery">届ける側</div>
+                        <div v-bind:class="{'selectRole-content':true, 'selected':this.user_type === 1}" @click="clickIrai">頼む側</div>
+                        <div v-bind:class="{'selectRole-content':true, 'selected':this.user_type === 0}" @click="clickDelivery">届ける側</div>
                     </div>
                 </div>
             </div>
