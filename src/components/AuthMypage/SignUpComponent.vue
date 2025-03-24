@@ -129,10 +129,10 @@ import axios from 'axios';
             },
             // 0:頼む側、1:届ける側
             clickIrai(){
-                this.user_type = 0;
+                this.user_type = 1;
             },
             clickDelivery(){
-                this.user_type = 1;
+                this.user_type = 0;
             },
             signup(){
                 let that = this;
