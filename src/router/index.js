@@ -14,6 +14,7 @@ import ConfilmView from '@/components/ConfilmView.vue'
 import UserLinkView from '@/components/UserLinkView.vue'
 import HomeView from '@/views/HomeView.vue'
 import RecieveView from '@/components/RecieveView.vue'
+import RequiredActionView from '@/components/RequiredActionView.vue'
 
 const routes = [
   {
@@ -85,6 +86,11 @@ const routes = [
     path:'/recieve',
     name:'recieve',
     component:RecieveView,
+  },
+  {
+    path:'/required',
+    name:'require',
+    component:RequiredActionView
   }
 ]
 
