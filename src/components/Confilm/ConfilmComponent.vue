@@ -26,7 +26,11 @@ import router from '@/router';
 import axios from 'axios';
 
 export default{
-    props:['isDelUsr'],
+    data(){
+        return{
+            isDelUsr:false
+        }
+    },
     methods:{
         acceptDelivary(){
             let regMethod = this.$store.state.confirmFlgs.registMethod;
@@ -102,6 +106,14 @@ export default{
                 this.$store.commit('debug', err);
             })
             router.push({name:'personalshoplist'});
+        }
+    },
+    mounted(){
+        let regMethod = this.$store.state.confirmFlgs.registMethod;
+        if(regMethod == 1 || regMethod == 2){
+            this.isDelUsr = true;
+        }else{
+            this.isDelUsr = false;
         }
     }
 }

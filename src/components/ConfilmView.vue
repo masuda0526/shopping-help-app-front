@@ -1,6 +1,6 @@
 <template>
     <HeaderView title="最終確認"></HeaderView>
-    <ConfilmComponent :isDelUsr="true"></ConfilmComponent>
+    <ConfilmComponent></ConfilmComponent>
 </template>
 
 <script>

@@ -89,7 +89,7 @@ const routes = [
   },
   {
     path:'/required',
-    name:'require',
+    name:'required',
     component:RequiredActionView
   }
 ]

@@ -2,6 +2,7 @@
     <div class="box">
         <button class="button button-green" @click="goRequestList">みんなの購入リスト</button>
         <button class="button button-red" @click="goShopping">買い物する</button>
+        <button class="button button-pink" @click="goRequired">未対応一覧</button>
         <button class="button button-yellow" @click="goUserLink">共有ユーザー追加</button>
     </div>
 </template>
@@ -24,6 +25,9 @@ export default{
         },
         goUserLink(){
             router.push({name:'userlink'})
+        },
+        goRequired(){
+            router.push({name:'required'})
         }
     }
     

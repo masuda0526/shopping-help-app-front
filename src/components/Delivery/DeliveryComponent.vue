@@ -74,7 +74,7 @@ export default{
                 this.$store.commit('initConfirmFlgs');
                 this.$store.state.confirmFlgs.registMethod = 2;
                 this.$store.state.confirmFlgs.r_uid = this.listPerUser.user_id;
-                this.$store.state.confirmFlgs.seq = this.$store.state.userInfo.id;
+                this.$store.state.confirmFlgs.b_uid = this.$store.state.userInfo.id;
                 router.push({name:'confilm'})
             }).catch(err => {
                 console.log(err)
