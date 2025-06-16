@@ -66,13 +66,8 @@
                         that.$store.commit('registSuccessMsg', 'ログイン成功！');
                         that.$store.commit('debug', '登録したフラッシュメッセージ');
                         that.$store.commit('debug', that.$store.state.flashMsg);
-                        if(that.$store.state.userInfo.user_type == 0){
-                            that.$store.commit('debug', 'マイページへ遷移します');
-                            router.push({name:'mypage'});
-                        }else{
-                            that.$store.commit('debug', '依頼者用買い物リスト画面へ遷移します');
-                            router.push({name:'personalshoplist'});
-                        }
+                        that.$store.commit('debug', 'マイページへ遷移します');
+                        router.push({name:'mypage'});
                     })
                 }
                 
