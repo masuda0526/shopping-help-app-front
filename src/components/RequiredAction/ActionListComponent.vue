@@ -34,15 +34,18 @@ import axios from 'axios';
                         this.setRequiredActionListForRequesterPerBuycode();
                     }
                 }else{
+                    this.$store.state.confirmFlgs.registMethod = 2;
                     if(type==0){
-                        this.$store.state.confirmFlgs.registMethod = 2;
                         this.setRequiredActionListForBuyerPerUser();
                     }else{
                         this.setRequiredActionListForRequesterPerUser();
                     }
                 }
+                this.$store.commit('debug', '取得したデータ');
+                this.$store.commit('debug', this.showList);
             },
             setRequiredActionListForBuyerPerUser(){
+                this.$store.commit('debug', '購入者用のユーザー毎リスト取得');
                 axios.get(this.$store.state.BASE_URL + 'require/peru/b', {
                     params:{
                         u_id:this.$store.state.userInfo.id
@@ -54,6 +57,7 @@ import axios from 'axios';
                 })
             },
             setRequiredActionListForBuyerPerBuycode(){
+                this.$store.commit('debug', '購入者用の購入ID毎リスト取得');
                 axios.get(this.$store.state.BASE_URL + 'require/perb/b', {
                     params:{
                         u_id:this.$store.state.userInfo.id
@@ -65,6 +69,7 @@ import axios from 'axios';
                 })
             },
             setRequiredActionListForRequesterPerUser(){
+                this.$store.commit('debug', '依頼者用のユーザー毎リスト取得');
                 axios.get(this.$store.state.BASE_URL + 'require/peru/r',{
                     params:{
                         u_id:this.$store.state.userInfo.id
@@ -74,6 +79,7 @@ import axios from 'axios';
                 })
             },
             setRequiredActionListForRequesterPerBuycode(){
+                this.$store.commit('debug', '依頼者用の購入ID   毎リスト取得');
                 axios.get(this.$store.state.BASE_URL + 'require/perb/r',{
                     params:{
                         u_id:this.$store.state.userInfo.id
@@ -86,6 +92,7 @@ import axios from 'axios';
         created(){
             this.$store.commit('checkLogin');
             let type = this.$store.state.userInfo.user_type;
+            this.$store.state.confirmFlgs.registMethod = 2;
             if(type == 0){
                 this.setRequiredActionListForBuyerPerUser();
             }else{

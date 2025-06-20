@@ -27,20 +27,29 @@ import router from '@/router';
         props:['product_list'],
         methods:{
             clickConfBtn(){
+                this.$store.commit('debug', 'userType = ' + this.$store.state.userInfo.user_type);
+                this.$store.commit('debug', 'rgstMethod = ' + this.$store.state.confirmFlgs.registMethod);
                 let rgstMethod = this.$store.state.confirmFlgs.registMethod;
                 if(rgstMethod == 1){
+                    this.$store.commit('debug', 'buycode = ' + this.product_list.buycode);
+                    this.$store.commit('debug', 'seq = ' + this.product_list.seq);
                     // buycodeで登録
                     this.$store.state.confirmFlgs.buycode = this.product_list.buycode;
                     this.$store.state.confirmFlgs.seq = this.product_list.seq;
                     router.push({name:'confilm'})
                 }else if(rgstMethod == 2){
                     // userIdで登録
-                    this.$store.state.confirmFlgs.r_uid = this.product_list.user_id;
-                    this.$store.state.confirmFlgs.b_uid = this.$store.state.userInfo.id;
-                    router.push({name:'confilm'})
-                }else if(rgstMethod == 3){
-                    this.$store.state.confirmFlgs.buycode = this.product_list.buycode;
-                    this.$store.state.confirmFlgs.seq = this.product_list.seq;
+                    let userType = this.$store.state.userInfo.user_type;
+                    this.$store.commit('debug', 'userType = ' + userType);
+                    this.$store.commit('debug', 'my_id = ' + this.$store.state.userInfo.id);
+                    this.$store.commit('debug', 'another_id = ' + this.product_list.user_id);
+                    if(userType == 0){
+                        this.$store.state.confirmFlgs.r_uid = this.product_list.user_id;
+                        this.$store.state.confirmFlgs.b_uid = this.$store.state.userInfo.id;
+                    }else if(userType == 1){
+                        this.$store.state.confirmFlgs.b_uid = this.product_list.user_id;
+                        this.$store.state.confirmFlgs.r_uid = this.$store.state.userInfo.id;
+                    }
                     router.push({name:'confilm'})
                 }
             }

@@ -16,8 +16,8 @@
         </p>
     </div>
     <div>
-        <button class="button button-pink confilmBtn" @click="acceptDelivary()" v-if="isDelUsr">受け渡し完了</button>
-        <button class="button button-pink confilmBtn" v-else>受け取り完了</button>
+        <button class="button button-pink confilmBtn" @click="accept()" v-if="isDelUsr">受け渡し完了</button>
+        <button class="button button-pink confilmBtn" @click="accept()" v-else>受け取り完了</button>
     </div>
 </template>
 
@@ -32,21 +32,27 @@ export default{
         }
     },
     methods:{
-        acceptDelivary(){
+        accept(){
             let regMethod = this.$store.state.confirmFlgs.registMethod;
+            let user_type = this.$store.state.userInfo.user_type;
             switch(regMethod){
                 case 1:
-                    this.acceptDelivaryByBuycode();
+                    if(user_type == 0){
+                        this.acceptDelivaryByBuycode();
+                    }else{
+                        this.acceptRecieveByBuycode();
+                    }
                     break;
                 case 2:
-                    this.acceptDelivaryByRequestUserId();
+                    if(user_type == 0){
+                        this.acceptDelivaryByRequestUserId();
+                    }else{
+                        this.acceptRecieveByRequestId();
+                    }
                     break;
-                case 3:
-                    this.acceptRecieve();
-                    break;
-
                 default:
                     this.$store.commit('debug', '不正なアクセスの可能性があります。');
+                    router.push({name:'mypage'});
             }
         },
         acceptDelivaryByBuycode(){
@@ -72,7 +78,7 @@ export default{
             let rUid = this.$store.state.confirmFlgs.r_uid;
             let bUid = this.$store.state.confirmFlgs.b_uid;
             this.$store.commit('debug', 'r_uid,b_uidを用いて最終確認処理を行います');
-            axios.get(this.$store.state.BASE_URL + 'accept/delivery/ruid', {
+            axios.get(this.$store.state.BASE_URL + 'accept/delivary/request_id', {
                 params:{
                     r_uid:rUid,
                     b_uid:bUid
@@ -87,11 +93,13 @@ export default{
                 this.$store.commit('debug', err);
             })
         },
-        acceptRecieve(){
+        acceptRecieveByBuycode(){
             let buyCode = this.$store.state.confirmFlgs.buycode;
             let seqNum = this.$store.state.confirmFlgs.seq;
+            console.log('buycode = ' + buyCode);
+            console.log('seq = ' + seqNum);
             this.$store.commit('debug', 'buycodeで最終確認処理を行います。(acceptRecieve)');
-            axios.get(this.$store.state.BASE_URL + 'completerecieve', {
+            axios.get(this.$store.state.BASE_URL + 'accept/recieve/buycode', {
                 params:{
                     buycode: buyCode,
                     seq: seqNum
@@ -100,17 +108,39 @@ export default{
                 this.$store.commit('debug', '登録成功。返却されたデータ。')
                 this.$store.commit('debug', data);
                 this.$store.commit('debug', 'マイページへ遷移します。')
-                router.push({name:'personalshoplist'});
+                router.push({name:'mypage'});
             }).catch(err => {
                 this.$store.commit('debug', 'エラー発生。エラー内容。');
                 this.$store.commit('debug', err);
             })
-            router.push({name:'personalshoplist'});
+            router.push({name:'mypage'});
+        },
+        acceptRecieveByRequestId(){
+            let rUid = this.$store.state.confirmFlgs.r_uid;
+            let bUid = this.$store.state.confirmFlgs.b_uid;
+            this.$store.commit('debug','r_uid,b_uidで最終確認処理を行います。(acceptRecieve)' );
+            axios.get(this.$store.state.BASE_URL + 'accept/recieve/request_id', {
+                params:{
+                    r_uid:rUid,
+                    b_uid:bUid
+                }
+            }).then(data => {
+                this.$store.commit('debug', '登録成功。返却されたデータ。')
+                this.$store.commit('debug', data);
+                this.$store.commit('debug', 'マイページへ遷移します。')
+                router.push({name:'mypage'});
+            }).catch(err => {
+                this.$store.commit('debug', 'エラー発生。エラー内容。');
+                this.$store.commit('debug', err);
+            })
         }
     },
     mounted(){
-        let regMethod = this.$store.state.confirmFlgs.registMethod;
-        if(regMethod == 1 || regMethod == 2){
+        // let regMethod = this.$store.state.confirmFlgs.registMethod;
+        let userType = this.$store.state.userInfo.user_type;
+        this.$store.commit('debug', 'userType = '+ userType)
+        this.$store.commit('debug', this.$store.state.confirmFlgs)
+        if(userType==0){
             this.isDelUsr = true;
         }else{
             this.isDelUsr = false;
